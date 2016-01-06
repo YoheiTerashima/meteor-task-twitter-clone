@@ -10,6 +10,18 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.body.events({
+    "submit .new-task" :function (event) {
+      event.preventDefault();
+      var text = event.target.text.value;
+      Tasks.insert({
+        text: text,
+        createdAt: new Date()
+      });
+      event.target.text.value = "";
+    }
+  });
+
   Template.hello.helpers({
     counter: function() {
       return Session.get('counter');
